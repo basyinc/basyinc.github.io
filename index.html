@@ -40,12 +40,11 @@
     .content {
       position: relative;
       z-index: 1;
-      width: 100%;
     }
 
     .logo {
       width: 100%;
-      max-width: 300px;
+      max-width: 500px;
       height: auto;
       margin-bottom: 20px;
       animation: pulse 3s infinite ease-in-out;
@@ -56,22 +55,23 @@
       50% { transform: scale(1.05); opacity: 0.9; }
     }
 
-    h1 {
-      font-size: 18px;
-      font-weight: 600;
-      text-transform: uppercase;
-      margin-bottom: 15px;
-      padding: 0 10px;
-    }
-
-    p {
+    .text {
+      margin: 0 auto;
+      max-width: 500px;
       font-size: 15px;
       line-height: 1.5;
       padding: 0 10px;
     }
 
     @media (max-width: 600px) {
-      p { font-size: 14px; }
+      .logo {
+        max-width: 300px;
+      }
+
+      .text {
+        max-width: 300px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
@@ -80,8 +80,7 @@
 
   <div class="content">
     <img src="basyinc-white.png" alt="Logo BASY INC" class="logo" />
-    <h1>Estamos construindo algo extraordinário</h1>
-    <p>
+    <p class="text">
       Nosso novo site da <strong>BASY INC</strong> está em construção.<br />
       Em breve, um novo mundo de inovação e negócios estará ao seu alcance.
     </p>
