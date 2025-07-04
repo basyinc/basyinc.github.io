@@ -28,48 +28,16 @@
       position: relative;
     }
 
-    .ripple-bg {
+    /* Animação estilo "Matrix" */
+    canvas#matrix-bg {
       position: absolute;
-      top: -100px;
-      left: 50%;
-      width: 900px;
-      height: 900px;
-      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 80%);
-      animation: ripple 6s infinite ease-in-out;
-      transform: translateX(-50%);
+      top: 0;
+      left: 0;
       z-index: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
     }
-
-    @keyframes ripple {
-      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.15; }
-      50% { transform: translateX(-50%) scale(1.2); opacity: 0.05; }
-    }
-
-    .bubble {
-      position: absolute;
-      bottom: 10%;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 50%;
-      opacity: 0.5;
-      filter: drop-shadow(0 0 4px rgba(255,255,255,0.5));
-      box-shadow: 0 0 12px rgba(255,255,255,0.3);
-      animation-timing-function: ease-in-out;
-      animation-iteration-count: infinite;
-      animation-direction: alternate;
-      pointer-events: none;
-    }
-
-    .bubble:nth-child(1) { width: 80px; height: 80px; left: 5%; animation: moveSide1 12s infinite; }
-    .bubble:nth-child(2) { width: 50px; height: 50px; left: 20%; animation: moveSide2 15s infinite 2s; }
-    .bubble:nth-child(3) { width: 100px; height: 100px; left: 40%; animation: moveSide3 18s infinite 1s; }
-    .bubble:nth-child(4) { width: 60px; height: 60px; left: 65%; animation: moveSide4 14s infinite 3s; }
-    .bubble:nth-child(5) { width: 90px; height: 90px; left: 80%; animation: moveSide5 16s infinite 4s; }
-
-    @keyframes moveSide1 { 0%,100%{transform:translateX(0);} 50%{transform:translateX(60px);} }
-    @keyframes moveSide2 { 0%,100%{transform:translateX(0);} 50%{transform:translateX(-40px);} }
-    @keyframes moveSide3 { 0%,100%{transform:translateX(0);} 50%{transform:translateX(80px);} }
-    @keyframes moveSide4 { 0%,100%{transform:translateX(0);} 50%{transform:translateX(-60px);} }
-    @keyframes moveSide5 { 0%,100%{transform:translateX(0);} 50%{transform:translateX(50px);} }
 
     img.logo {
       width: 100%;
@@ -139,24 +107,55 @@
   </style>
 </head>
 <body>
-  <div class="ripple-bg"></div>
+  <!-- Fundo animado estilo Matrix -->
+  <canvas id="matrix-bg"></canvas>
 
-  <!-- Bolhas -->
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-  <div class="bubble"></div>
-
-  <!-- Logo local -->
+  <!-- Conteúdo -->
   <img src="basyinc-white.png" alt="Logo BASY Inc." class="logo" />
-
-  <!-- Conteúdo central -->
   <h1>Estamos construindo algo extraordinário</h1>
   <p>Nosso novo site da BASY Inc. está em construção. Em breve, um novo mundo de inovação e negócios estará ao seu alcance.</p>
 
   <div class="loader">
     <div></div><div></div><div></div><div></div><div></div>
   </div>
+
+  <script>
+    const canvas = document.getElementById('matrix-bg');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = fontSize + "px monospace";
+      ctx.fillStyle = Math.random() > 0.5 ? "#ffffff" : "#a45af2";
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 50);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
