@@ -6,7 +6,6 @@
   <title>BASY INC</title>
   <link rel="icon" href="basy-favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
   <style>
     * {
       margin: 0;
@@ -17,7 +16,7 @@
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #5F00A0, #2E005E);
-      color: #ffffff;
+      color: #fff;
       height: 100vh;
       overflow: hidden;
       display: flex;
@@ -35,17 +34,16 @@
       z-index: 0;
       width: 100%;
       height: 100%;
-      opacity: 0.6; /* 60% de transparência */
+      opacity: 0.6;
     }
 
     .content {
       position: relative;
       z-index: 1;
-      max-width: 420px;
       width: 100%;
     }
 
-    img.logo {
+    .logo {
       width: 100%;
       max-width: 300px;
       height: auto;
@@ -59,39 +57,27 @@
     }
 
     h1 {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 600;
       text-transform: uppercase;
-      color: #ffffff;
       margin-bottom: 15px;
+      padding: 0 10px;
     }
 
     p {
       font-size: 15px;
-      color: #ffffff;
       line-height: 1.5;
+      padding: 0 10px;
     }
 
     @media (max-width: 600px) {
-      .content {
-        max-width: 90%;
-      }
-
-      h1 {
-        font-size: 18px;
-      }
-
-      p {
-        font-size: 14px;
-      }
+      p { font-size: 14px; }
     }
   </style>
 </head>
 <body>
-  <!-- Fundo estilo Matrix -->
   <canvas id="matrix-bg"></canvas>
 
-  <!-- Conteúdo -->
   <div class="content">
     <img src="basyinc-white.png" alt="Logo BASY INC" class="logo" />
     <h1>Estamos construindo algo extraordinário</h1>
@@ -105,39 +91,39 @@
     const canvas = document.getElementById('matrix-bg');
     const ctx = canvas.getContext('2d');
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
 
     const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const fontSize = 14;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
+    let columns = Math.floor(canvas.width / fontSize);
+    let drops = Array(columns).fill(1);
 
-    function draw() {
+    function drawMatrix() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-
       ctx.font = fontSize + "px monospace";
-      ctx.fillStyle = Math.random() > 0.5 ? "#ffffff" : "#ffffff";
 
       for (let i = 0; i < drops.length; i++) {
         const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillStyle = Math.random() > 0.5
+          ? "rgba(255,255,255,0.7)"
+          : "rgba(0,0,0,0.7)";
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
-
         drops[i]++;
       }
     }
 
-    setInterval(draw, 50);
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
+    setInterval(drawMatrix, 50);
   </script>
 </body>
 </html>
