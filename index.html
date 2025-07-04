@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BASY Inc.</title>
 
-  <!-- Importando a fonte Lufga do Google Fonts -->
+  <!-- Fonte Lufga -->
   <link href="https://fonts.googleapis.com/css2?family=Lufga:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
@@ -27,7 +27,7 @@
       text-align: center;
       overflow: hidden;
       position: relative;
-      padding: 0 15px; /* para um pouco de espaçamento nas laterais no mobile */
+      padding: 0 15px;
     }
 
     .ripple-bg {
@@ -65,7 +65,7 @@
 
     h1 {
       font-family: 'Lufga', sans-serif;
-      font-size: calc(2.8em / 3); /* 1/3 do tamanho original */
+      font-size: calc(2.8em / 3);
       margin-bottom: 15px;
       z-index: 2;
     }
@@ -77,20 +77,51 @@
       margin: 0 auto;
     }
 
+    /* Novo loader moderno */
     .loader {
-      border: 6px solid #fff;
-      border-top: 6px solid #a45af2;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      animation: spin 1s linear infinite;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 6px;
       margin-top: 30px;
       z-index: 2;
+      height: 40px;
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .loader > div {
+      width: 6px;
+      height: 20px;
+      background: linear-gradient(45deg, #a45af2, #5ff0f3);
+      animation: loaderAnim 1.2s infinite ease-in-out;
+      border-radius: 3px;
+    }
+
+    /* Diferente delay para cada barra */
+    .loader > div:nth-child(1) {
+      animation-delay: -1.1s;
+    }
+    .loader > div:nth-child(2) {
+      animation-delay: -1.0s;
+    }
+    .loader > div:nth-child(3) {
+      animation-delay: -0.9s;
+    }
+    .loader > div:nth-child(4) {
+      animation-delay: -0.8s;
+    }
+    .loader > div:nth-child(5) {
+      animation-delay: -0.7s;
+    }
+
+    @keyframes loaderAnim {
+      0%, 40%, 100% {
+        transform: scaleY(0.4);
+        opacity: 0.6;
+      }
+      20% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
     }
 
     /* Responsividade */
@@ -100,7 +131,7 @@
       }
 
       h1 {
-        font-size: calc((2.8em / 3) * 0.8); /* diminui um pouco mais no mobile */
+        font-size: calc((2.8em / 3) * 0.8);
       }
 
       p {
@@ -115,6 +146,12 @@
   <img src="https://github.com/basyinc/basyinc.github.io-/blob/0f6fe424b8e8c549ac6d5325140cc090310ca295/Group%201000003187%20(1).png?raw=true" alt="Logo BASY Inc." class="logo" />
   <h1>Estamos construindo algo extraordinário</h1>
   <p>Nosso novo site da BASY Inc. está em construção. Em breve, um novo mundo de inovação e negócios estará ao seu alcance.</p>
-  <div class="loader"></div>
+  <div class="loader">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
 </body>
 </html>
