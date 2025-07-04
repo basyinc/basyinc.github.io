@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BASY Inc.</title>
+
+  <!-- Importando a fonte Lufga do Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lufga:wght@400;700&display=swap" rel="stylesheet" />
+
   <style>
     * {
       margin: 0;
@@ -23,6 +27,7 @@
       text-align: center;
       overflow: hidden;
       position: relative;
+      padding: 0 15px; /* para um pouco de espaçamento nas laterais no mobile */
     }
 
     .ripple-bg {
@@ -44,7 +49,8 @@
     }
 
     img.logo {
-      max-width: 300px;
+      max-width: 400px;
+      width: 100%;
       height: auto;
       margin-bottom: 30px;
       z-index: 2;
@@ -58,7 +64,8 @@
     }
 
     h1 {
-      font-size: 2.8em;
+      font-family: 'Lufga', sans-serif;
+      font-size: calc(2.8em / 3); /* 1/3 do tamanho original */
       margin-bottom: 15px;
       z-index: 2;
     }
@@ -67,6 +74,7 @@
       font-size: 1.2em;
       max-width: 520px;
       z-index: 2;
+      margin: 0 auto;
     }
 
     .loader {
@@ -83,6 +91,22 @@
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      img.logo {
+        max-width: 300px;
+      }
+
+      h1 {
+        font-size: calc((2.8em / 3) * 0.8); /* diminui um pouco mais no mobile */
+      }
+
+      p {
+        font-size: 1em;
+        max-width: 90%;
+      }
     }
   </style>
 </head>
