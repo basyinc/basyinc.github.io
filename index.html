@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -13,8 +12,7 @@
     }
 
     body {
-      background: linear-gradient(to bottom, #5F00A0, #000000);
-      background-attachment: fixed;
+      background: linear-gradient(135deg, #5F00A0, #2E005E);
       color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
@@ -23,26 +21,26 @@
       align-items: center;
       height: 100vh;
       text-align: center;
-      position: relative;
       overflow: hidden;
+      position: relative;
     }
 
-    body::before {
-      content: '';
+    .ripple-bg {
       position: absolute;
       top: -100px;
       left: 50%;
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 80%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 80%);
       animation: ripple 6s infinite ease-in-out;
       transform: translateX(-50%);
+      z-index: 0;
     }
 
     @keyframes ripple {
-      0% { transform: translateX(-50%) scale(1); opacity: 0.2; }
-      50% { transform: translateX(-50%) scale(1.1); opacity: 0.05; }
-      100% { transform: translateX(-50%) scale(1); opacity: 0.2; }
+      0% { transform: translateX(-50%) scale(1); opacity: 0.15; }
+      50% { transform: translateX(-50%) scale(1.2); opacity: 0.05; }
+      100% { transform: translateX(-50%) scale(1); opacity: 0.15; }
     }
 
     img.logo {
@@ -50,17 +48,24 @@
       height: auto;
       margin-bottom: 30px;
       z-index: 2;
+      animation: pulse 3s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+      100% { transform: scale(1); opacity: 1; }
     }
 
     h1 {
-      font-size: 2.5em;
+      font-size: 2.8em;
       margin-bottom: 15px;
       z-index: 2;
     }
 
     p {
       font-size: 1.2em;
-      max-width: 500px;
+      max-width: 520px;
       z-index: 2;
     }
 
@@ -82,9 +87,10 @@
   </style>
 </head>
 <body>
+  <div class="ripple-bg"></div>
   <img src="https://cdn.jsdelivr.net/gh/user-img-hosting/basy-logo.png" alt="Logo BASY Inc." class="logo">
-  <h1>Estamos construindo algo incrível!</h1>
-  <p>Nosso novo site institucional da BASY Inc. está em desenvolvimento. Em breve, você poderá explorar tudo o que preparamos para você.</p>
+  <h1>Estamos construindo algo extraordinário</h1>
+  <p>Nosso novo site da BASY Inc. está em construção. Em breve, um novo mundo de inovação e negócios estará ao seu alcance.</p>
   <div class="loader"></div>
 </body>
 </html>
