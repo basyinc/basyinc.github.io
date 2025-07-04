@@ -6,6 +6,7 @@
   <title>BASY INC</title>
   <link rel="icon" href="basy-favicon.png" type="image/png" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
     * {
       margin: 0;
@@ -18,17 +19,14 @@
       background: linear-gradient(135deg, #5F00A0, #2E005E);
       color: #fff;
       height: 100vh;
+      overflow: hidden;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      overflow: hidden;
-      padding: 0 15px;
       position: relative;
+      padding: 0 15px;
     }
 
-    /* Animação estilo "Matrix" */
     canvas#matrix-bg {
       position: absolute;
       top: 0;
@@ -36,15 +34,27 @@
       z-index: 0;
       width: 100%;
       height: 100%;
-      display: block;
+    }
+
+    .glass-container {
+      position: relative;
+      z-index: 2;
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
     }
 
     img.logo {
       width: 100%;
-      max-width: 400px;
+      max-width: 300px;
       height: auto;
-      margin-bottom: 30px;
-      z-index: 2;
+      margin-bottom: 20px;
       animation: pulse 3s infinite ease-in-out;
     }
 
@@ -54,69 +64,46 @@
     }
 
     h1 {
-      font-weight: 600;
       font-size: 20px;
+      font-weight: 600;
+      color: #ffffff;
       margin-bottom: 15px;
-      white-space: nowrap;
-      z-index: 2;
     }
 
     p {
-      font-weight: 400;
-      font-size: 16px;
-      max-width: 400px;
-      margin: 0 auto;
-      z-index: 2;
-      line-height: 1.4;
-    }
-
-    .loader {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      gap: 6px;
-      margin-top: 30px;
-      z-index: 2;
-      height: 40px;
-    }
-
-    .loader > div {
-      width: 6px;
-      height: 20px;
-      background: linear-gradient(45deg, #a45af2, #5ff0f3);
-      animation: loaderAnim 1.2s infinite ease-in-out;
-      border-radius: 3px;
-    }
-
-    .loader > div:nth-child(1) { animation-delay: -1.1s; }
-    .loader > div:nth-child(2) { animation-delay: -1.0s; }
-    .loader > div:nth-child(3) { animation-delay: -0.9s; }
-    .loader > div:nth-child(4) { animation-delay: -0.8s; }
-    .loader > div:nth-child(5) { animation-delay: -0.7s; }
-
-    @keyframes loaderAnim {
-      0%, 40%, 100% { transform: scaleY(0.4); opacity: 0.6; }
-      20% { transform: scaleY(1); opacity: 1; }
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.5;
     }
 
     @media (max-width: 600px) {
-      img.logo { max-width: 300px; }
-      h1 { font-size: 18px; white-space: normal; }
-      p { font-size: 14px; max-width: 300px; }
+      .glass-container {
+        padding: 30px 20px;
+        max-width: 90%;
+      }
+
+      h1 {
+        font-size: 18px;
+      }
+
+      p {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Fundo animado estilo Matrix -->
+  <!-- Fundo estilo Matrix -->
   <canvas id="matrix-bg"></canvas>
 
-  <!-- Conteúdo -->
-  <img src="basyinc-white.png" alt="Logo BASY Inc." class="logo" />
-  <h1>Estamos construindo algo extraordinário</h1>
-  <p>Nosso novo site da BASY Inc. está em construção. Em breve, um novo mundo de inovação e negócios estará ao seu alcance.</p>
-
-  <div class="loader">
-    <div></div><div></div><div></div><div></div><div></div>
+  <!-- Conteúdo com efeito de vidro -->
+  <div class="glass-container">
+    <img src="basyinc-white.png" alt="Logo BASY Inc." class="logo" />
+    <h1>Estamos construindo algo extraordinário</h1>
+    <p>
+      Nosso novo site da <span style="color: #a45af2; font-weight: 500;">BASY Inc.</span> está em construção.<br />
+      Em breve, um novo mundo de inovação e negócios estará ao seu alcance.
+    </p>
   </div>
 
   <script>
@@ -128,9 +115,8 @@
 
     const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const fontSize = 14;
-    const columns = canvas.width / fontSize;
-
-    const drops = Array(Math.floor(columns)).fill(1);
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
 
     function draw() {
       ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
@@ -146,6 +132,7 @@
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
+
         drops[i]++;
       }
     }
