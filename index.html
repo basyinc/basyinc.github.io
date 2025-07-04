@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASY Inc.</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #5F00A0, #000000);
+      background-attachment: fixed;
+      color: #ffffff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 80%);
+      animation: ripple 6s infinite ease-in-out;
+      transform: translateX(-50%);
+    }
+
+    @keyframes ripple {
+      0% { transform: translateX(-50%) scale(1); opacity: 0.2; }
+      50% { transform: translateX(-50%) scale(1.1); opacity: 0.05; }
+      100% { transform: translateX(-50%) scale(1); opacity: 0.2; }
+    }
+
+    img.logo {
+      max-width: 300px;
+      height: auto;
+      margin-bottom: 30px;
+      z-index: 2;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 15px;
+      z-index: 2;
+    }
+
+    p {
+      font-size: 1.2em;
+      max-width: 500px;
+      z-index: 2;
+    }
+
+    .loader {
+      border: 6px solid #fff;
+      border-top: 6px solid #a45af2;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin-top: 30px;
+      z-index: 2;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <img src="https://cdn.jsdelivr.net/gh/user-img-hosting/basy-logo.png" alt="Logo BASY Inc." class="logo">
+  <h1>Estamos construindo algo incrível!</h1>
+  <p>Nosso novo site institucional da BASY Inc. está em desenvolvimento. Em breve, você poderá explorar tudo o que preparamos para você.</p>
+  <div class="loader"></div>
+</body>
+</html>
