@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BASY Inc.</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Lufga:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Fonte Poppins moderna e minimalista -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
 
   <style>
     * {
@@ -17,7 +18,7 @@
     body {
       background: linear-gradient(135deg, #5F00A0, #2E005E);
       color: #ffffff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Poppins', sans-serif;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -47,6 +48,94 @@
       100% { transform: translateX(-50%) scale(1); opacity: 0.15; }
     }
 
+    /* Bolhas animadas */
+    .bubble {
+      position: absolute;
+      bottom: 10%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation-timing-function: ease-in-out;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      pointer-events: none;
+      filter: blur(1px);
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+    }
+
+    /* Criando bolhas com tamanhos e posições distintas e animações diferentes */
+    .bubble:nth-child(1) {
+      width: 80px;
+      height: 80px;
+      left: 5%;
+      animation-name: moveSide1;
+      animation-duration: 12s;
+    }
+
+    .bubble:nth-child(2) {
+      width: 50px;
+      height: 50px;
+      left: 20%;
+      animation-name: moveSide2;
+      animation-duration: 15s;
+      animation-delay: 2s;
+    }
+
+    .bubble:nth-child(3) {
+      width: 100px;
+      height: 100px;
+      left: 40%;
+      animation-name: moveSide3;
+      animation-duration: 18s;
+      animation-delay: 1s;
+    }
+
+    .bubble:nth-child(4) {
+      width: 60px;
+      height: 60px;
+      left: 65%;
+      animation-name: moveSide4;
+      animation-duration: 14s;
+      animation-delay: 3s;
+    }
+
+    .bubble:nth-child(5) {
+      width: 90px;
+      height: 90px;
+      left: 80%;
+      animation-name: moveSide5;
+      animation-duration: 16s;
+      animation-delay: 4s;
+    }
+
+    /* Animações horizontais, batendo nas extremidades e voltando */
+
+    @keyframes moveSide1 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(60px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes moveSide2 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-40px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes moveSide3 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(80px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes moveSide4 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-60px); }
+      100% { transform: translateX(0); }
+    }
+    @keyframes moveSide5 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(50px); }
+      100% { transform: translateX(0); }
+    }
+
     img.logo {
       max-width: 400px;
       width: 100%;
@@ -63,18 +152,20 @@
     }
 
     h1 {
-      font-family: 'Lufga', sans-serif;
-      font-size: calc(2.8em / 3);
+      font-weight: 600;
+      font-size: 24px;
       margin: 0 auto 15px;
       max-width: 400px;
       z-index: 2;
     }
 
     p {
-      font-size: 1.2em;
+      font-weight: 400;
+      font-size: 16px;
       max-width: 400px;
       margin: 0 auto;
       z-index: 2;
+      line-height: 1.4;
     }
 
     .loader {
@@ -128,12 +219,12 @@
       }
 
       h1 {
-        font-size: calc((2.8em / 3) * 0.8);
+        font-size: 20px;
         max-width: 300px;
       }
 
       p {
-        font-size: 1em;
+        font-size: 14px;
         max-width: 300px;
       }
     }
@@ -141,6 +232,14 @@
 </head>
 <body>
   <div class="ripple-bg"></div>
+
+  <!-- Bolhas -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
   <img src="https://github.com/basyinc/basyinc.github.io-/blob/0f6fe424b8e8c549ac6d5325140cc090310ca295/Group%201000003187%20(1).png?raw=true" alt="Logo BASY Inc." class="logo" />
   <h1>Estamos construindo algo extraordinário</h1>
   <p>Nosso novo site da BASY Inc. está em construção. Em breve, um novo mundo de inovação e negócios estará ao seu alcance.</p>
