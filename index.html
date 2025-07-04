@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BASY INC</title>
 
-  <link rel="icon" href="https://github.com/basyinc/basyinc.github.io/blob/c7bbc2598084a6f67ea33091b00713d8ba325141/basy-favi.png?raw=true" type="image/png" />
+  <!-- Favicon com caminho relativo -->
+  <link rel="icon" href="/basy-favi.png" type="image/png" />
 
   <!-- Fonte Poppins moderna e minimalista -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
@@ -38,7 +39,7 @@
       left: 50%;
       width: 900px;
       height: 900px;
-      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, rgba(0,0,0,0) 80%);
+      background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(0,0,0,0) 80%);
       animation: ripple 6s infinite ease-in-out;
       transform: translateX(-50%);
       z-index: 0;
@@ -50,154 +51,91 @@
       100% { transform: translateX(-50%) scale(1); opacity: 0.15; }
     }
 
+    /* Bolhas animadas */
     .bubble {
       position: absolute;
       bottom: 10%;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.15);
       border-radius: 50%;
       opacity: 0.5;
       animation-timing-function: ease-in-out;
       animation-iteration-count: infinite;
       animation-direction: alternate;
       pointer-events: none;
-      filter: blur(0.5px);
-      transform: translateZ(0);
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.2), 2px 4px 10px rgba(0, 0, 0, 0.2);
-      z-index: 1;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.5));
+      box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
     }
 
-    /* Novas bolhas (10) com tamanhos e posições aleatórias iniciais */
+    /* Criando bolhas com tamanhos e posições distintas e animações diferentes */
     .bubble:nth-child(1) {
       width: 80px;
       height: 80px;
       left: 5%;
-      bottom: 15%;
-      animation-name: moveRandom1;
-      animation-duration: 16s;
-      animation-delay: 0s;
+      animation-name: moveSide1;
+      animation-duration: 12s;
     }
+
     .bubble:nth-child(2) {
       width: 50px;
       height: 50px;
-      left: 15%;
-      bottom: 20%;
-      animation-name: moveRandom2;
-      animation-duration: 18s;
+      left: 20%;
+      animation-name: moveSide2;
+      animation-duration: 15s;
       animation-delay: 2s;
     }
+
     .bubble:nth-child(3) {
       width: 100px;
       height: 100px;
-      left: 30%;
-      bottom: 10%;
-      animation-name: moveRandom3;
-      animation-duration: 20s;
+      left: 40%;
+      animation-name: moveSide3;
+      animation-duration: 18s;
       animation-delay: 1s;
     }
+
     .bubble:nth-child(4) {
       width: 60px;
       height: 60px;
-      left: 45%;
-      bottom: 18%;
-      animation-name: moveRandom4;
-      animation-duration: 15s;
+      left: 65%;
+      animation-name: moveSide4;
+      animation-duration: 14s;
       animation-delay: 3s;
     }
+
     .bubble:nth-child(5) {
       width: 90px;
       height: 90px;
-      left: 55%;
-      bottom: 12%;
-      animation-name: moveRandom5;
-      animation-duration: 17s;
+      left: 80%;
+      animation-name: moveSide5;
+      animation-duration: 16s;
       animation-delay: 4s;
     }
-    .bubble:nth-child(6) {
-      width: 70px;
-      height: 70px;
-      left: 65%;
-      bottom: 14%;
-      animation-name: moveRandom6;
-      animation-duration: 19s;
-      animation-delay: 2.5s;
-    }
-    .bubble:nth-child(7) {
-      width: 40px;
-      height: 40px;
-      left: 75%;
-      bottom: 22%;
-      animation-name: moveRandom7;
-      animation-duration: 14s;
-      animation-delay: 1.7s;
-    }
-    .bubble:nth-child(8) {
-      width: 85px;
-      height: 85px;
-      left: 85%;
-      bottom: 16%;
-      animation-name: moveRandom8;
-      animation-duration: 21s;
-      animation-delay: 3.3s;
-    }
-    .bubble:nth-child(9) {
-      width: 55px;
-      height: 55px;
-      left: 90%;
-      bottom: 20%;
-      animation-name: moveRandom9;
-      animation-duration: 22s;
-      animation-delay: 0.7s;
-    }
-    .bubble:nth-child(10) {
-      width: 95px;
-      height: 95px;
-      left: 50%;
-      bottom: 25%;
-      animation-name: moveRandom10;
-      animation-duration: 16s;
-      animation-delay: 2.9s;
-    }
 
-    /* Animações aleatórias em X e Y para movimento 3D leve */
-    @keyframes moveRandom1 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(30px, -20px); }
+    /* Animações horizontais */
+    @keyframes moveSide1 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(60px); }
+      100% { transform: translateX(0); }
     }
-    @keyframes moveRandom2 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-20px, 25px); }
+    @keyframes moveSide2 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-40px); }
+      100% { transform: translateX(0); }
     }
-    @keyframes moveRandom3 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(35px, 15px); }
+    @keyframes moveSide3 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(80px); }
+      100% { transform: translateX(0); }
     }
-    @keyframes moveRandom4 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-25px, -30px); }
+    @keyframes moveSide4 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(-60px); }
+      100% { transform: translateX(0); }
     }
-    @keyframes moveRandom5 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(20px, 30px); }
-    }
-    @keyframes moveRandom6 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-30px, 20px); }
-    }
-    @keyframes moveRandom7 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(25px, -15px); }
-    }
-    @keyframes moveRandom8 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-20px, 25px); }
-    }
-    @keyframes moveRandom9 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(30px, -25px); }
-    }
-    @keyframes moveRandom10 {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(-25px, 20px); }
+    @keyframes moveSide5 {
+      0% { transform: translateX(0); }
+      50% { transform: translateX(50px); }
+      100% { transform: translateX(0); }
     }
 
     img.logo {
@@ -219,7 +157,6 @@
       font-weight: 600;
       font-size: 20px;
       margin: 0 auto 15px;
-      max-width: 400px; /* mesmo tamanho do logo */
       z-index: 2;
     }
 
@@ -227,7 +164,6 @@
       font-weight: 400;
       font-size: 16px;
       margin: 0 auto;
-      max-width: 400px; /* mesmo tamanho do logo */
       z-index: 2;
       line-height: 1.4;
     }
@@ -250,11 +186,21 @@
       border-radius: 3px;
     }
 
-    .loader > div:nth-child(1) { animation-delay: -1.1s; }
-    .loader > div:nth-child(2) { animation-delay: -1.0s; }
-    .loader > div:nth-child(3) { animation-delay: -0.9s; }
-    .loader > div:nth-child(4) { animation-delay: -0.8s; }
-    .loader > div:nth-child(5) { animation-delay: -0.7s; }
+    .loader > div:nth-child(1) {
+      animation-delay: -1.1s;
+    }
+    .loader > div:nth-child(2) {
+      animation-delay: -1.0s;
+    }
+    .loader > div:nth-child(3) {
+      animation-delay: -0.9s;
+    }
+    .loader > div:nth-child(4) {
+      animation-delay: -0.8s;
+    }
+    .loader > div:nth-child(5) {
+      animation-delay: -0.7s;
+    }
 
     @keyframes loaderAnim {
       0%, 40%, 100% {
@@ -268,17 +214,42 @@
     }
 
     @media (max-width: 600px) {
-      img.logo { max-width: 300px; }
-      h1 { font-size: 18px; max-width: 300px; }
-      p { font-size: 14px; max-width: 300px; }
+      img.logo {
+        max-width: 300px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+
+      p {
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="ripple-bg"></div>
 
-  <!-- 10 bolhas -->
+  <!-- Bolhas -->
   <div class="bubble"></div>
   <div class="bubble"></div>
   <div class="bubble"></div>
-  <div
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <!-- Logo com caminho relativo -->
+  <img src="/Group1000003187(1).png" alt="Logo BASY Inc." class="logo" />
+  
+  <h1>Estamos construindo algo extraordinário</h1>
+  <p>Nosso novo site da BASY Inc. está em construção. Em breve, um novo mundo de inovação e negócios estará ao seu alcance.</p>
+  
+  <div class="loader">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</body>
+</html>
