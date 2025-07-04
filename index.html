@@ -50,16 +50,16 @@
     .bubble {
       position: absolute;
       bottom: 10%;
-      background: rgba(255, 255, 255, 0.2); /* +opacidade */
+      background: rgba(255, 255, 255, 0.2);
       border-radius: 50%;
-      opacity: 0.5; /* mais visível */
+      opacity: 0.5;
       animation-timing-function: ease-in-out;
       animation-iteration-count: infinite;
       animation-direction: alternate;
       pointer-events: none;
-      filter: blur(0.5px); /* menos borrado */
+      filter: blur(0.5px);
       transform: translateZ(0);
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.2), 2px 4px 10px rgba(0, 0, 0, 0.2); /* sombra 3D */
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.2), 2px 4px 10px rgba(0, 0, 0, 0.2);
       z-index: 1;
     }
 
@@ -150,19 +150,19 @@
 
     h1 {
       font-weight: 600;
-      font-size: 20px; /* ajustado */
+      font-size: 20px;
       margin: 0 auto 15px;
-      max-width: 400px;
       z-index: 2;
+      /* max-width removido para largura livre */
     }
 
     p {
       font-weight: 400;
       font-size: 16px;
-      max-width: 400px;
       margin: 0 auto;
       z-index: 2;
       line-height: 1.4;
+      /* max-width removido para largura livre */
     }
 
     .loader {
@@ -202,8 +202,8 @@
 
     @media (max-width: 600px) {
       img.logo { max-width: 300px; }
-      h1 { font-size: 18px; max-width: 300px; }
-      p { font-size: 14px; max-width: 300px; }
+      h1 { font-size: 18px; }
+      p { font-size: 14px; }
     }
   </style>
 </head>
