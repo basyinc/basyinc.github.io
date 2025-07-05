@@ -4,81 +4,107 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BASY INC</title>
-  <link rel="preload" href="basy-favicon.png" as="image">
+  <link rel="preload" href="basy-favicon.png" as="image" />
   <link rel="icon" href="basy-favicon.png" type="image/png" />
   <link href="https://rubjo.github.io/victor-mono/VictorMono-All.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:'Victor Mono', monospace;
-      background:linear-gradient(135deg,#5F00A0,#2E005E);
-      color:#fff;
-      height:100vh;
-      overflow:hidden;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:0 15px;
-      position:relative;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    canvas#matrix-bg{
-      position:absolute;
-      top:0;left:0;
-      z-index:0;
-      width:100%;
-      height:100%;
-      opacity:0.6;
+    body {
+      font-family: 'Victor Mono', monospace;
+      background: linear-gradient(135deg, #5F00A0, #2E005E);
+      color: #fff;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 15px;
+      position: relative;
     }
-    .content{
-      position:relative;
-      z-index:1;
+    canvas#matrix-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.6;
     }
-    .logo{
-      width:500px;
-      height:auto;
-      margin-bottom:10px;
-      animation:pulse 3s infinite ease-in-out;
+    .content {
+      position: relative;
+      z-index: 1;
     }
-    @keyframes pulse{
-      0%,100%{transform:scale(1);opacity:1}
-      50%{transform:scale(1.05);opacity:0.9}
+    .logo {
+      width: 500px;
+      height: auto;
+      margin-bottom: 10px;
+      animation: pulse 3s infinite ease-in-out;
     }
-    .new-text{
-      width:100%;
-      max-width:500px;
-      margin:10px auto 0;
-      font-family:'Victor Mono', monospace;
-      font-style:italic;
-      font-weight:300;
-      font-size:40px;
-      line-height:1.2;
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
     }
-    .new-text strong{
-      font-weight:660;
+    .new-text {
+      width: 100%;
+      max-width: 500px;
+      margin: 10px auto 0;
+      font-family: 'Victor Mono', monospace;
+      font-style: italic;
+      font-weight: 300;
+      font-size: 40px;
+      line-height: 1.2;
+      white-space: nowrap;
     }
-    .construction{
-      margin-top:15px;
-      font-size:28px;
-      opacity:0.9;
-      font-family:'Syne',sans-serif;
+    .construction {
+      margin-top: 15px;
+      font-size: 28px;
+      opacity: 0.9;
+      font-family: 'Syne', sans-serif;
     }
-    .dot{
-      opacity:0;
-      animation:blink 1.5s infinite;
+    .dot {
+      opacity: 0;
+      animation: blink 1.5s infinite;
     }
-    .dot:nth-child(2){animation-delay:0.3s}
-    .dot:nth-child(3){animation-delay:0.6s}
-    .dot:nth-child(4){animation-delay:0.9s}
-    @keyframes blink{
-      0%,100%{opacity:0}
-      50%{opacity:1}
+    .dot:nth-child(2) {
+      animation-delay: 0.3s;
     }
-    @media(max-width:600px){
-      .logo{width:300px}
-      .new-text{max-width:300px;font-size:24px}
-      .construction{font-size:18px}
+    .dot:nth-child(3) {
+      animation-delay: 0.6s;
+    }
+    .dot:nth-child(4) {
+      animation-delay: 0.9s;
+    }
+    @keyframes blink {
+      0%, 100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+    @media (max-width: 600px) {
+      .logo {
+        width: 300px;
+      }
+      .new-text {
+        max-width: 300px;
+        font-size: 24px;
+      }
+      .construction {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
@@ -87,8 +113,8 @@
   <div class="content">
     <img src="basyinc-white.png" alt="Logo BASY INC" class="logo" />
     <p class="new-text">
-      Investindo no <strong>agora</strong>,<br />
-      mirando no futuro.
+      <span id="typing-word" style="font-weight:600;"></span>
+      <span style="font-weight:300;"> no agora,<br />mirando no futuro.</span>
     </p>
     <p class="construction">
       Site em construção<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
@@ -96,9 +122,10 @@
   </div>
 
   <script>
+    // Fundo Matrix
     const canvas = document.getElementById('matrix-bg');
     const ctx = canvas.getContext('2d');
-    function resizeCanvas(){
+    function resizeCanvas() {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
@@ -110,21 +137,73 @@
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
 
-    function drawMatrix(){
+    function drawMatrix() {
       ctx.fillStyle = "rgba(0,0,0,0.05)";
-      ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.font = fontSize + "px monospace";
-      for(let i=0;i<drops.length;i++){
-        const text = letters[Math.floor(Math.random()*letters.length)];
-        ctx.fillStyle = Math.random()>0.5 ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)";
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillStyle = Math.random() > 0.5 ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)";
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
         drops[i]++;
       }
     }
     setInterval(drawMatrix, 50);
+
+    // Máquina de escrever para palavras dinâmicas
+    const words = [
+      "Investindo",
+      "Trabalhando",
+      "Construindo",
+      "Apostando",
+      "Inovando",
+      "Projetando",
+      "Modelando",
+      "Forjando"
+    ];
+
+    const typingElement = document.getElementById('typing-word');
+    const waitTime = 1500; // tempo em ms que a palavra fica completa antes de apagar
+    const typingSpeed = 120; // ms por letra digitada
+    const deletingSpeed = 60; // ms por letra apagada
+
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function type() {
+      const currentWord = words[wordIndex];
+
+      if (!isDeleting) {
+        // digitando
+        typingElement.textContent = currentWord.substring(0, charIndex + 1);
+        charIndex++;
+
+        if (charIndex === currentWord.length) {
+          isDeleting = true;
+          setTimeout(type, waitTime);
+        } else {
+          setTimeout(type, typingSpeed);
+        }
+      } else {
+        // apagando
+        typingElement.textContent = currentWord.substring(0, charIndex - 1);
+        charIndex--;
+
+        if (charIndex === 0) {
+          isDeleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+          setTimeout(type, typingSpeed);
+        } else {
+          setTimeout(type, deletingSpeed);
+        }
+      }
+    }
+
+    type();
   </script>
 </body>
 </html>
