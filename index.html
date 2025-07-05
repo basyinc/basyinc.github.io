@@ -4,119 +4,91 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BASY INC</title>
+  <link rel="preload" href="basy-favicon.png" as="image">
   <link rel="icon" href="basy-favicon.png" type="image/png" />
   <link href="https://rubjo.github.io/victor-mono/VictorMono-All.css" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:'Victor Mono', monospace;
+      background:linear-gradient(135deg,#5F00A0,#2E005E);
+      color:#fff;
+      height:100vh;
+      overflow:hidden;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:0 15px;
+      position:relative;
     }
-
-    body {
-      font-family: 'Victor Mono', monospace;
-      background: linear-gradient(135deg, #5F00A0, #2E005E);
-      color: #fff;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 0 15px;
-      position: relative;
+    canvas#matrix-bg{
+      position:absolute;
+      top:0;left:0;
+      z-index:0;
+      width:100%;
+      height:100%;
+      opacity:0.6;
     }
-
-    canvas#matrix-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0.6;
+    .content{
+      position:relative;
+      z-index:1;
     }
-
-    .content {
-      position: relative;
-      z-index: 1;
+    .logo{
+      width:500px;
+      height:auto;
+      margin-bottom:10px;
+      animation:pulse 3s infinite ease-in-out;
     }
-
-    .logo {
-      width: 500px;
-      height: auto;
-      margin-bottom: 10px;
-      animation: pulse 3s infinite ease-in-out;
+    @keyframes pulse{
+      0%,100%{transform:scale(1);opacity:1}
+      50%{transform:scale(1.05);opacity:0.9}
     }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.05); opacity: 0.9; }
+    .new-text{
+      width:100%;
+      max-width:500px;
+      margin:10px auto 0;
+      font-family:'Victor Mono', monospace;
+      font-style:italic;
+      font-weight:300;
+      font-size:40px;
+      line-height:1.2;
     }
-
-    .new-text {
-      font-size: 40px;
-      line-height: 1.3;
-      max-width: 600px;
-      margin: 10px auto 0;
+    .new-text strong{
+      font-weight:660;
     }
-
-    .highlighted-word {
-      font-style: italic;
-      font-weight: 660;
+    .construction{
+      margin-top:15px;
+      font-size:28px;
+      opacity:0.9;
+      font-family:'Syne',sans-serif;
     }
-
-    .typed-suffix {
-      font-family: 'Victor Mono', monospace;
-      font-style: italic;
-      font-weight: 400;
+    .dot{
+      opacity:0;
+      animation:blink 1.5s infinite;
     }
-
-    .construction {
-      margin-top: 15px;
-      font-size: 36px;
-      opacity: 0.9;
-      font-family: 'Syne', sans-serif;
+    .dot:nth-child(2){animation-delay:0.3s}
+    .dot:nth-child(3){animation-delay:0.6s}
+    .dot:nth-child(4){animation-delay:0.9s}
+    @keyframes blink{
+      0%,100%{opacity:0}
+      50%{opacity:1}
     }
-
-    .dot {
-      opacity: 0;
-      animation: blink 1.5s infinite;
-    }
-
-    .dot:nth-child(2) { animation-delay: 0.3s; }
-    .dot:nth-child(3) { animation-delay: 0.6s; }
-    .dot:nth-child(4) { animation-delay: 0.9s; }
-
-    @keyframes blink {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
-
-    @media (max-width: 600px) {
-      .logo {
-        width: 300px;
-      }
-
-      .new-text {
-        font-size: 24px;
-      }
-
-      .construction {
-        font-size: 24px;
-      }
+    @media(max-width:600px){
+      .logo{width:300px}
+      .new-text{max-width:300px;font-size:24px}
+      .construction{font-size:18px}
     }
   </style>
 </head>
 <body>
   <canvas id="matrix-bg"></canvas>
-
   <div class="content">
     <img src="basyinc-white.png" alt="Logo BASY INC" class="logo" />
     <p class="new-text">
-      <span id="dynamic-word"><strong class="highlighted-word">Investindo</strong></span>
-      <span class="typed-suffix"> no agora,<br />construindo o futuro.</span>
+      Investindo no <strong>agora</strong>,<br />
+      construindo o futuro.
     </p>
     <p class="construction">
       Site em construção<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
@@ -126,12 +98,10 @@
   <script>
     const canvas = document.getElementById('matrix-bg');
     const ctx = canvas.getContext('2d');
-
-    function resizeCanvas() {
+    function resizeCanvas(){
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
-
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
@@ -140,62 +110,21 @@
     let columns = Math.floor(canvas.width / fontSize);
     let drops = Array(columns).fill(1);
 
-    function drawMatrix() {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    function drawMatrix(){
+      ctx.fillStyle = "rgba(0,0,0,0.05)";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
       ctx.font = fontSize + "px monospace";
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillStyle = Math.random() > 0.5
-          ? "rgba(255,255,255,0.7)"
-          : "rgba(0,0,0,0.7)";
+      for(let i=0;i<drops.length;i++){
+        const text = letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillStyle = Math.random()>0.5 ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)";
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975){
           drops[i] = 0;
         }
         drops[i]++;
       }
     }
-
     setInterval(drawMatrix, 50);
-
-    // Palavra dinâmica com efeito máquina de escrever
-    const words = [
-      "Investindo",
-      "Apostando",
-      "Acreditando",
-      "Impulsionando",
-      "Agindo",
-      "Construindo",
-      "Movimentando"
-    ];
-
-    let wordIndex = 0;
-    const dynamicSpan = document.getElementById('dynamic-word');
-
-    function typeWord(word, callback) {
-      dynamicSpan.innerHTML = '<strong class="highlighted-word"></strong>';
-      let i = 0;
-      const interval = setInterval(() => {
-        dynamicSpan.querySelector("strong").textContent += word.charAt(i);
-        i++;
-        if (i === word.length) {
-          clearInterval(interval);
-          setTimeout(callback, 2000);
-        }
-      }, 100);
-    }
-
-    function loopWords() {
-      typeWord(words[wordIndex], () => {
-        wordIndex = (wordIndex + 1) % words.length;
-        loopWords();
-      });
-    }
-
-    loopWords();
   </script>
 </body>
 </html>
