@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BASY INC</title>
   <link rel="icon" href="basy-favicon.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -14,7 +14,7 @@
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Syne', sans-serif;
       background: linear-gradient(135deg, #5F00A0, #2E005E);
       color: #fff;
       height: 100vh;
@@ -46,7 +46,10 @@
       width: 100%;
       max-width: 500px;
       height: auto;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
+    }
+
+    .pulse {
       animation: pulse 3s infinite ease-in-out;
     }
 
@@ -56,18 +59,16 @@
     }
 
     .new-text {
-      font-size: 48px;
-      margin-top: 10px;
-      line-height: 1.4;
+      width: 100%;
       max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      animation: pulse 3s infinite ease-in-out;
+      margin: 10px auto 0;
+      font-size: clamp(20px, 5vw, 48px); /* Ajuste automático entre 20px e 48px */
+      line-height: 1.4;
     }
 
     .construction {
-      margin-top: 20px;
-      font-size: 24px;
+      margin-top: 15px;
+      font-size: calc(clamp(20px, 5vw, 48px) * 0.7); /* 30% menor que o texto principal */
       opacity: 0.9;
     }
 
@@ -92,29 +93,14 @@
       0%, 100% { opacity: 0; }
       50% { opacity: 1; }
     }
-
-    @media (max-width: 600px) {
-      .logo {
-        max-width: 300px;
-      }
-
-      .new-text {
-        max-width: 300px;
-        font-size: 26px;
-      }
-
-      .construction {
-        font-size: 18px;
-      }
-    }
   </style>
 </head>
 <body>
   <canvas id="matrix-bg"></canvas>
 
   <div class="content">
-    <img src="basyinc-white.png" alt="Logo BASY INC" class="logo" />
-    <p class="new-text">
+    <img src="basyinc-white.png" alt="Logo BASY INC" class="logo pulse" />
+    <p class="new-text pulse">
       Investindo no agora,<br />
       construindo o futuro.
     </p>
