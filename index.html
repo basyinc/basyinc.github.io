@@ -68,7 +68,7 @@
       white-space: nowrap;
     }
     .construction {
-      margin-top: 15px;
+      margin-top: 30px; /* espaçamento dobrado */
       font-size: 28px;
       opacity: 0.9;
       font-family: 'Syne', sans-serif;
@@ -80,7 +80,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 15px;
+      gap: 30px; /* espaço dobrado entre links */
       z-index: 1;
     }
     .contact-links a {
@@ -109,11 +109,7 @@
       }
       .contact-links {
         font-size: 16px;
-        flex-direction: column;
-        gap: 5px;
-      }
-      .contact-links span {
-        display: none;
+        gap: 20px; /* ainda espaçado, mas menor para telas pequenas */
       }
     }
   </style>
@@ -191,7 +187,6 @@
       const currentWord = words[wordIndex];
 
       if (!isDeleting) {
-        // digitando
         typingElement.textContent = currentWord.substring(0, charIndex + 1);
         charIndex++;
 
@@ -202,7 +197,6 @@
           setTimeout(type, typingSpeed);
         }
       } else {
-        // apagando
         typingElement.textContent = currentWord.substring(0, charIndex - 1);
         charIndex--;
 
