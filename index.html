@@ -73,26 +73,28 @@
       opacity: 0.9;
       font-family: 'Syne', sans-serif;
     }
-    .dot {
-      opacity: 0;
-      animation: blink 1.5s infinite;
+    .contact-links {
+      margin-top: 10px;
+      font-size: 22px;
+      font-family: 'Syne', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      z-index: 1;
     }
-    .dot:nth-child(2) {
-      animation-delay: 0.3s;
+    .contact-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.3s;
     }
-    .dot:nth-child(3) {
-      animation-delay: 0.6s;
+    .contact-links a:hover {
+      opacity: 0.7;
     }
-    .dot:nth-child(4) {
-      animation-delay: 0.9s;
-    }
-    @keyframes blink {
-      0%, 100% {
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
+    .contact-links span {
+      font-weight: 300;
+      opacity: 0.8;
     }
     @media (max-width: 600px) {
       .logo {
@@ -105,6 +107,14 @@
       .construction {
         font-size: 18px;
       }
+      .contact-links {
+        font-size: 16px;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .contact-links span {
+        display: none;
+      }
     }
   </style>
 </head>
@@ -116,9 +126,12 @@
       <span id="typing-word" style="font-weight:600;"></span>
       <span style="font-weight:300;"> no agora,<br />mirando no futuro.</span>
     </p>
-    <p class="construction">
-      Site em construção<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
-    </p>
+    <p class="construction">Contact us</p>
+    <div class="contact-links">
+      <a href="https://wa.me/message/RR5ZPXMGRB7GB1" target="_blank">WhatsApp</a>
+      <span>|</span>
+      <a href="mailto:adm@basy.com.br">E-mail</a>
+    </div>
   </div>
 
   <script>
